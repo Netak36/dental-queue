@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>คิวทันตกรรม รพ.สต.บ้านหนองไผ่ อ.ลาดยาว | วันจันทร์</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal-50: #E1F5EE; --teal-100: #9FE1CB; --teal-600: #0F6E56; --teal-800: #085041;
+      --amber-50: #FAEEDA; --amber-100: #FAC775; --amber-600: #BA7517; --amber-800: #633806;
+      --red-50: #FCEBEB; --red-100: #F7C1C1; --red-600: #A32D2D;
+      --blue-50: #E6F1FB; --blue-100: #B5D4F4; --blue-600: #185FA5; --blue-800: #0C447C;
+      --green-100: #C0DD97; --green-800: #27500A;
+      --coral-100: #F5C4B3; --coral-800: #712B13;
+      --gray-50: #F7F6F2; --gray-100: #E8E6DF; --gray-200: #D3D1C7; --gray-400: #888780; --gray-600: #5F5E5A; --gray-900: #2C2C2A;
+      --bg: #F4F2EC;
+      --surface: #FFFFFF;
+      --border: rgba(0,0,0,0.1);
+      --border-dashed: rgba(0,0,0,0.15);
+      --text-primary: #2C2C2A;
+      --text-secondary: #5F5E5A;
+      --text-hint: #888780;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1A1A18; --surface: #262623; --border: rgba(255,255,255,0.1);
+        --border-dashed: rgba(255,255,255,0.15);
+        --text-primary: #F0EEE6; --text-secondary: #B4B2A9; --text-hint: #888780;
+        --gray-50: #2C2C2A; --gray-100: #3A3936;
+      }
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      font-family: 'Sarabun', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 0 0 3rem;
+    }
+
+    /* ── Top bar ── */
+    .topbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px; position: sticky; top: 0; z-index: 10;
+    }
+    .topbar-brand { display: flex; align-items: center; gap: 10px; }
+    .topbar-brand svg { color: var(--teal-600); }
+    .topbar-brand h1 { font-size: 16px; font-weight: 600; color: var(--text-primary); }
+    .topbar-brand span { font-size: 12px; color: var(--text-hint); }
+    .topbar-right { display: flex; align-items: center; gap: 8px; }
+    .btn-icon { background: transparent; border: 1px solid var(--border); border-radius: var(--radius-sm); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-secondary); font-size: 18px; transition: background 0.15s; }
+    .btn-icon:hover { background: var(--gray-100); }
+
+    /* ── Page layout ── */
+    .page { max-width: 860px; margin: 0 auto; padding: 1.5rem 1.25rem; }
+
+    /* ── Week nav ── */
+    .week-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+    .week-nav h2 { font-size: 18px; font-weight: 500; }
+    .week-nav p { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+    .nav-btns { display: flex; gap: 6px; }
+    .nav-btns button {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 6px 14px; font-size: 13px;
+      font-family: 'Sarabun', sans-serif;
+      cursor: pointer; color: var(--text-primary); transition: background 0.15s;
+    }
+    .nav-btns button:hover { background: var(--gray-100); }
+    .nav-btns button.today { background: var(--teal-600); color: #fff; border-color: var(--teal-600); }
+
+    /* ── Stats ── */
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px 18px; }
+    .stat-card .label { font-size: 12px; color: var(--text-hint); margin-bottom: 4px; }
+    .stat-card .value { font-size: 28px; font-weight: 600; }
+    .stat-card.v-teal .value { color: var(--teal-600); }
+    .stat-card.v-amber .value { color: var(--amber-600); }
+    .stat-card.v-red .value { color: var(--red-600); }
+
+    /* ── Queue ── */
+    .queue { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.75rem; }
+    .slot-row { display: grid; grid-template-columns: 72px 1fr; gap: 12px; align-items: stretch; }
+    .slot-time { font-size: 13px; font-weight: 500; color: var(--text-hint); text-align: right; padding-top: 18px; }
+    .slot-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 14px 18px;
+      display: flex; align-items: center; gap: 14px; min-height: 68px;
+      transition: box-shadow 0.2s;
+    }
+    .slot-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .slot-card.filled { background: var(--teal-50); border-color: var(--teal-100); }
+    .slot-card.empty { border-style: dashed; border-color: var(--border-dashed); opacity: 0.75; }
+    .slot-card.current { background: var(--amber-50); border-color: var(--amber-100); }
+    .avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 600; flex-shrink: 0;
+    }
+    .avatar.teal { background: var(--teal-100); color: var(--teal-800); }
+    .avatar.gray { background: var(--gray-200); color: var(--gray-600); }
+    .avatar.amber { background: var(--amber-100); color: var(--amber-800); }
+    .slot-info { flex: 1; min-width: 0; }
+    .slot-name { font-size: 15px; font-weight: 500; }
+    .slot-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 3px; font-size: 12px; color: var(--text-secondary); align-items: center; }
+    .badge {
+      display: inline-block; padding: 2px 9px; border-radius: 99px;
+      font-size: 11px; font-weight: 500;
+    }
+    .badge.fill { background: var(--green-100); color: var(--green-800); }
+    .badge.extract { background: var(--coral-100); color: var(--coral-800); }
+    .badge.clean { background: var(--blue-100); color: var(--blue-800); }
+    .badge.free { background: var(--gray-100); color: var(--gray-600); }
+    .badge.now { background: var(--amber-100); color: var(--amber-800); }
+    .btn-cancel {
+      background: transparent; border: 1px solid var(--red-100);
+      color: var(--red-600); border-radius: var(--radius-sm);
+      padding: 5px 12px; font-size: 12px; font-family: 'Sarabun', sans-serif;
+      cursor: pointer; flex-shrink: 0; transition: background 0.15s;
+    }
+    .btn-cancel:hover { background: var(--red-50); }
+
+    /* ── Form card ── */
+    .form-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.25rem 1.5rem;
+    }
+    .form-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 1.1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    .form-row.single { grid-template-columns: 1fr; }
+    .form-group label { font-size: 12px; color: var(--text-secondary); display: block; margin-bottom: 4px; }
+    .form-group input,
+    .form-group select {
+      width: 100%; height: 38px; padding: 0 12px;
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      background: var(--gray-50); color: var(--text-primary);
+      font-size: 14px; font-family: 'Sarabun', sans-serif;
+      outline: none; transition: border-color 0.15s;
+    }
+    .form-group input:focus,
+    .form-group select:focus { border-color: var(--teal-600); }
+    .btn-submit {
+      width: 100%; height: 42px; margin-top: 8px;
+      background: var(--teal-600); color: #fff; border: none;
+      border-radius: var(--radius-sm); font-size: 15px; font-weight: 500;
+      font-family: 'Sarabun', sans-serif; cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-submit:hover { background: var(--teal-800); }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: var(--gray-900); color: #fff;
+      padding: 10px 20px; border-radius: var(--radius-md);
+      font-size: 14px; opacity: 0; pointer-events: none;
+      transition: opacity 0.3s; white-space: nowrap;
+    }
+    .toast.show { opacity: 1; }
+
+    /* ── Legend ── */
+    .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 1rem; }
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-hint); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+
+    /* ── Section divider ── */
+    .section-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-hint); margin-bottom: 0.75rem; }
+
+    @media (max-width: 540px) {
+      .stats { grid-template-columns: repeat(3, 1fr); }
+      .form-row { grid-template-columns: 1fr; }
+      .slot-row { grid-template-columns: 56px 1fr; }
+      .btn-cancel { display: none; }
+      .topbar-brand span { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="topbar-brand">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2C8.5 2 6 5 6 8c0 2 .5 3.5 1 5l1 7c.2 1 1 2 2 2h4c1 0 1.8-1 2-2l1-7c.5-1.5 1-3 1-5 0-3-2.5-6-6-6z"/>
+    </svg>
+    <div>
+      <h1>คิวทันตกรรม รพ.สต.บ้านหนองไผ่ อ.ลาดยาว</h1>
+      <span>ระบบนัดหมายวันจันทร์</span>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div style="font-size:13px;color:var(--text-hint)" id="clock"></div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- Week nav -->
+  <div class="week-nav">
+    <div>
+      <h2 id="week-heading">—</h2>
+      <p id="week-sub">เคสละ 1 ชั่วโมง · 08:30 – 11:30 น.</p>
+    </div>
+    <div class="nav-btns">
+      <button onclick="changeWeek(-1)">← ก่อนหน้า</button>
+      <button class="today" onclick="resetWeek()">สัปดาห์นี้</button>
+      <button onclick="changeWeek(1)">ถัดไป →</button>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-card v-amber"><div class="label">มีนัดแล้ว</div><div class="value" id="s-booked">0</div></div>
+    <div class="stat-card v-teal"><div class="label">ว่าง</div><div class="value" id="s-free">3</div></div>
+    <div class="stat-card"><div class="label">ทั้งหมด/วัน</div><div class="value">3</div></div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item"><div class="dot" style="background:var(--teal-600)"></div>มีนัด</div>
+    <div class="legend-item"><div class="dot" style="background:var(--gray-200);border:1px dashed var(--gray-400)"></div>ว่าง</div>
+    <div class="legend-item"><div class="dot" style="background:var(--amber-600)"></div>ช่วงเวลาปัจจุบัน</div>
+  </div>
+
+  <!-- Queue -->
+  <div class="section-label">คิววันนี้</div>
+  <div class="queue" id="queue"></div>
+
+  <!-- Form -->
+  <div class="section-label">เพิ่มการนัด</div>
+  <div class="form-card">
+    <h3>📋 บันทึกนัดใหม่</h3>
+    <div class="form-row">
+      <div class="form-group"><label>ชื่อ *</label><input id="f-fname" type="text" placeholder="ชื่อ"></div>
+      <div class="form-group"><label>นามสกุล *</label><input id="f-lname" type="text" placeholder="นามสกุล"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>เบอร์โทร *</label><input id="f-phone" type="tel" placeholder="08X-XXX-XXXX"></div>
+      <div class="form-group"><label>อายุ *</label><input id="f-age" type="number" placeholder="อายุ (ปี)" min="1" max="120"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>ความต้องการ *</label>
+        <select id="f-need">
+          <option value="">-- เลือก --</option>
+          <option value="อุดฟัน">🦷 อุดฟัน</option>
+          <option value="ถอนฟัน">🔧 ถอนฟัน</option>
+          <option value="ขูดหินปูน">✨ ขูดหินปูน</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>ช่วงเวลา *</label>
+        <select id="f-slot"></select>
+      </div>
+    </div>
+    <button class="btn-submit" onclick="addAppt()">+ บันทึกนัดหมาย</button>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const SLOTS = [
+    { time: '08:30', label: '08:30 – 09:30 น.' },
+    { time: '09:30', label: '09:30 – 10:30 น.' },
+    { time: '10:30', label: '10:30 – 11:30 น.' },
+  ];
+
+  let weekOffset = 0;
+  let db = JSON.parse(localStorage.getItem('dental_appts') || '{}');
+
+  function save() { localStorage.setItem('dental_appts', JSON.stringify(db)); }
+
+  function getMonday(offset) {
+    const d = new Date();
+    const day = d.getDay();
+    const diff = (day === 0 ? -6 : 1) - day;
+    d.setDate(d.getDate() + diff + offset * 7);
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }
+
+  function dateKey(d) { return d.toISOString().slice(0, 10); }
+
+  function fmtThai(d) {
+    return d.toLocaleDateString('th-TH', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  }
+
+  function isCurrentSlot(time) {
+    const now = new Date();
+    const mon = getMonday(weekOffset);
+    if (now.toDateString() !== mon.toDateString()) return false;
+    const [h, m] = time.split(':').map(Number);
+    const start = new Date(mon); start.setHours(h, m, 0, 0);
+    const end = new Date(start.getTime() + 3600000);
+    return now >= start && now < end;
+  }
+
+  function initials(f, l) { return ((f || '')[0] || '') + ((l || '')[0] || ''); }
+
+  function needClass(n) {
+    return { 'อุดฟัน': 'fill', 'ถอนฟัน': 'extract', 'ขูดหินปูน': 'clean' }[n] || '';
+  }
+
+  function render() {
+    const mon = getMonday(weekOffset);
+    const key = dateKey(mon);
+    const day = db[key] || {};
+
+    document.getElementById('week-heading').textContent = fmtThai(mon);
+
+    let booked = 0;
+    const queue = document.getElementById('queue');
+    queue.innerHTML = '';
+
+    SLOTS.forEach(s => {
+      const appt = day[s.time];
+      const cur = isCurrentSlot(s.time);
+      if (appt) booked++;
+
+      let cardCls = 'slot-card';
+      if (appt) cardCls += ' filled';
+      else if (cur) cardCls += ' current';
+      else cardCls += ' empty';
+
+      let inner = '';
+      if (appt) {
+        inner = `
+          <div class="avatar teal">${initials(appt.fname, appt.lname)}</div>
+          <div class="slot-info">
+            <div class="slot-name">${appt.fname} ${appt.lname}</div>
+            <div class="slot-meta">
+              <span>📞 ${appt.phone}</span>
+              <span>อายุ ${appt.age} ปี</span>
+              <span class="badge ${needClass(appt.need)}">${appt.need}</span>
+            </div>
+          </div>
+          <button class="btn-cancel" onclick="removeAppt('${key}','${s.time}')">ยกเลิก</button>`;
+      } else if (cur) {
+        inner = `
+          <div class="avatar amber">⏱</div>
+          <div class="slot-info">
+            <div class="slot-name" style="color:var(--amber-800)">ช่วงนี้ว่าง</div>
+            <div class="slot-meta"><span class="badge now">ตอนนี้</span></div>
+          </div>`;
+      } else {
+        inner = `
+          <div class="avatar gray">🦷</div>
+          <div class="slot-info">
+            <div class="slot-name" style="color:var(--text-hint)">ว่าง — รับนัดได้</div>
+            <div class="slot-meta"><span class="badge free">เปิดรับ</span></div>
+          </div>`;
+      }
+
+      queue.innerHTML += `
+        <div class="slot-row">
+          <div class="slot-time">${s.time}</div>
+          <div class="${cardCls}">${inner}</div>
+        </div>`;
+    });
+
+    document.getElementById('s-booked').textContent = booked;
+    document.getElementById('s-free').textContent = SLOTS.length - booked;
+
+    const sel = document.getElementById('f-slot');
+    sel.innerHTML = '<option value="">-- เลือก --</option>';
+    SLOTS.forEach(s => {
+      if (!day[s.time]) {
+        sel.innerHTML += `<option value="${s.time}">${s.label}</option>`;
+      }
+    });
+  }
+
+  function changeWeek(d) { weekOffset += d; render(); }
+  function resetWeek() { weekOffset = 0; render(); }
+
+  function addAppt() {
+    const fname = document.getElementById('f-fname').value.trim();
+    const lname = document.getElementById('f-lname').value.trim();
+    const phone = document.getElementById('f-phone').value.trim();
+    const age   = document.getElementById('f-age').value.trim();
+    const need  = document.getElementById('f-need').value;
+    const slot  = document.getElementById('f-slot').value;
+    if (!fname || !lname || !phone || !age || !need || !slot) {
+      toast('⚠️ กรุณากรอกข้อมูลให้ครบทุกช่อง'); return;
+    }
+    const key = dateKey(getMonday(weekOffset));
+    if (!db[key]) db[key] = {};
+    db[key][slot] = { fname, lname, phone, age, need };
+    save();
+    ['f-fname','f-lname','f-phone','f-age'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('f-need').value = '';
+    document.getElementById('f-slot').value = '';
+    toast(`✓ บันทึกนัด ${fname} ${lname} เรียบร้อยแล้ว`);
+    render();
+  }
+
+  function removeAppt(key, time) {
+    if (db[key]) { delete db[key][time]; save(); render(); toast('ยกเลิกนัดแล้ว'); }
+  }
+
+  function toast(msg) {
+    const el = document.getElementById('toast');
+    el.textContent = msg; el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 2800);
+  }
+
+  function updateClock() {
+    document.getElementById('clock').textContent =
+      new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  }
+
+  render();
+  updateClock();
+  setInterval(render, 30000);
+  setInterval(updateClock, 1000);
+</script>
+</body>
+</html>
